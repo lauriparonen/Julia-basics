@@ -16,21 +16,29 @@ function guess_the_number()
         print("Enter your guess: ")
         flush(stdout)
 
-        guess = parse(Int, readline())
+        input = readline()
 
-        if guess < secret_number
-            println("Too low! Try again.")
-        elseif guess > secret_number
-            println("Too high! Try again.")
-        else
-            println("Congratulations! You guessed the secret number ", 
-                    secret_number, " in ", attempts, " attempts. Well done.")
-                    break
+        try
+            guess = parse(Int, input)
+
+            if guess < secret_number
+                println("Too low! Try again.")
+            elseif guess > secret_number
+                println("Too high! Try again.")
+            else
+                println("Congratulations! You guessed the secret number ", 
+                        secret_number, " in ", attempts, " attempts. Well done.")
+                break
+            end
+        catch
+            println("It's a number guessing game. Try again :)")
         end
-    end 
+    end
+    
     println("Do you want to play again? Y/N")
     choice = readline()
-    if choice == "y"
+    
+    if lowercase(choice) == "y"
         guess_the_number()
     else
         println("Goodbye!")
